@@ -8,9 +8,9 @@ CC = nasm
 LINKER = ld
 
 BUILD := build
-SRCS := $(addprefix ${BUILD}/,chapter7/Project1.asm)
-BINS := Project1
-GDBS := chapter7/Project1
+SRCS := $(addprefix ${BUILD}/,chapter7/Project1.asm chapter7/Project2.asm)
+BINS := Project1 Project2
+GDBS := $(addprefix gdb/,chapter7/Project1 chapter7/Project2)
 
 .PHONY = all clean gdb/${GDBS}
 
@@ -35,7 +35,7 @@ ${BINS}:
 	./build/$@
 
 # Run gdb commands
-gdb/${GDBS}:
+${GDBS}:
 	gdb <$@.txt ${BUILD}/$(@F)
 
 clean:
