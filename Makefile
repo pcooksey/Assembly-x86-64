@@ -8,7 +8,7 @@ CC = nasm
 LINKER = ld
 
 BUILD := build
-FILES := chapter7/Project1 chapter7/Project2 chapter7/Project3 chapter7/Project4
+FILES := chapter7/Project1 chapter7/Project2 chapter7/Project3 chapter7/Project4 chapter7/Project5
 SRCS := $(addprefix ${BUILD}/,$(addsuffix .asm,${FILES}))
 BINS := Project1 Project2 Project3 Project4 # This needs to change
 GDBS := $(addprefix gdb/,${FILES})

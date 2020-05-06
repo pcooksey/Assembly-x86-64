@@ -1,0 +1,48 @@
+#-----------------------------
+#  Debugger Input Script
+#-----------------------------
+# $gdb <file.DIS prog
+# Example Commands Pg. 77
+# u in x/ub for unsigned printing
+# NOTE: x/uh is for 16 bytes (half word... confusing!)
+#       x/uw is for 32 bytes (double word)
+#       x/ug is for 64 bytes (giant word)
+echo \n\n
+break last
+run
+set pagination off
+set logging file out.txt
+set loggin overwrite
+set logging on
+set prompt
+echo ------------------------\n
+echo Display variables \n
+echo \n
+x/uw &dAns1
+x/xw &dAns1
+x/uw &dAns2
+x/xw &dAns2
+x/uw &dAns3
+x/xw &dAns3
+x/uw &dAns6
+x/xw &dAns6
+x/uw &dAns7
+x/xw &dAns7
+x/uw &dAns8
+x/xw &dAns8
+x/ug &qAns11
+x/xg &qAns11
+x/ug &qAns12
+x/xg &qAns12
+x/ug &qAns13
+x/xg &qAns13
+x/uw &dAns16
+x/xw &dAns16
+x/uw &dAns17
+x/xw &dAns17
+x/uw &dAns18
+x/xw &dAns18
+x/uw &dRem18
+x/xw &dRem18
+set logging off
+quit
