@@ -8,9 +8,9 @@ CC = nasm
 LINKER = ld
 
 BUILD := build
-FILES := chapter7/Project1 chapter7/Project2 chapter7/Project3 chapter7/Project4 chapter7/Project5 chapter7/Project6 chapter7/Project7 chapter7/Project8 chapter7/Project9
+CHAPTERS := ${addprefix ${BUILD}/,chapter7 chapter8}
+FILES := chapter7/Project1 chapter7/Project2 chapter7/Project3 chapter7/Project4 chapter7/Project5 chapter7/Project6 chapter7/Project7 chapter7/Project8 chapter7/Project9 chapter8/Project1
 SRCS := $(addprefix ${BUILD}/,$(addsuffix .asm,${FILES}))
-BINS := Project1 Project2 Project3 Project4 # This needs to change
 GDBS := $(addprefix gdb/,${FILES})
 
 .PHONY = all clean ${GDBS}
@@ -19,25 +19,25 @@ all: ${SRCS}
 
 ${BUILD}/%.asm: %.o
 	@echo "Linking.."
-	${LINKER} -g -m elf_x86_64 -o ${BUILD}/$(*F) ${BUILD}/$(*F).o
+	${LINKER} -g -m elf_x86_64 -o ${BUILD}/$* ${BUILD}/$*.o
 
 %.o: %.asm
 	@echo "Creating object.."
-	${CC} -g -F dwarf -f elf64 -o ${BUILD}/$(*F).o $<
+	${CC} -g -F dwarf -f elf64 -o ${BUILD}/$@ $<
 
-${SRCS}: | ${BUILD}
+${SRCS}: | ${CHAPTERS}
 
-${BUILD}:
+${CHAPTERS}:
 	@echo "Creating build folder.."
-	mkdir -p build
+	mkdir -p $@
 
 # Run the Program
-${BINS}:
+${FILES}:
 	./build/$@
 
 # Run gdb commands
 ${GDBS}:
-	gdb <$@.txt ${BUILD}/$(@F)
+	gdb <$@.txt ${BUILD}/$(subst gdb/,,$@)
 
 clean:
 	@echo "Cleaning up..."

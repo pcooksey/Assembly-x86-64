@@ -1,0 +1,25 @@
+#-----------------------------
+#  Debugger Input Script
+#-----------------------------
+# $gdb <file.DIS prog
+# Example Commands Pg. 77
+# d in x/db for signed printing
+# u in x/ub for unsigned printing
+# NOTE: x/dh is for 16 bytes (half word)
+#       x/dw is for 32 bytes (double word)
+#       x/dg is for 64 bytes (giant word)
+echo \n\n
+break last
+run
+set pagination off
+set logging file out.txt
+set loggin overwrite
+set logging on
+set prompt
+echo ------------------------\n
+echo Display variables \n
+echo \n
+x/uw &Sum
+x/xw &Sum
+set logging off
+quit
